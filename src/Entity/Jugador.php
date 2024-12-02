@@ -25,6 +25,10 @@ class Jugador
     #[ORM\Column(nullable: true)]
     private ?int $dorsal;
 
+    #[ORM\ManyToOne(targetEntity: Equipo::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Equipo $equipo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +75,17 @@ class Jugador
     public function setDorsal(?int $dorsal): Jugador
     {
         $this->dorsal = $dorsal;
+        return $this;
+    }
+
+    public function getEquipo(): ?Equipo
+    {
+        return $this->equipo;
+    }
+
+    public function setEquipo(?Equipo $equipo): Jugador
+    {
+        $this->equipo = $equipo;
         return $this;
     }
 }
