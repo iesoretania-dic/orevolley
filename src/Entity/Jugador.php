@@ -25,7 +25,7 @@ class Jugador
     #[ORM\Column(nullable: true)]
     private ?int $dorsal;
 
-    #[ORM\ManyToOne(targetEntity: Equipo::class)]
+    #[ORM\ManyToOne(targetEntity: Equipo::class, inversedBy: 'plantilla')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Equipo $equipo;
 
