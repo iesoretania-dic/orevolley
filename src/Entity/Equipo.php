@@ -46,7 +46,7 @@ class Equipo
     }
 
     /**
-     * @return Collection<int, Persona>
+     * @return Collection<int, Jugador>
      */
     public function getPlantilla(): Collection
     {

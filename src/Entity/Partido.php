@@ -80,6 +80,9 @@ class Partido
         return $this;
     }
 
+    /**
+     * @return Collection<int, Patrocinador>
+     */
     public function getPatrocinadores(): Collection
     {
         return $this->patrocinadores;

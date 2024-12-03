@@ -71,6 +71,9 @@ class Arbitro
         return $this;
     }
 
+    /**
+     * @return Collection<int, Partido>
+     */
     public function getPartidos(): Collection
     {
         return $this->partidos;
