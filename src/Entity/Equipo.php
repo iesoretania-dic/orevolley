@@ -21,6 +21,9 @@ class Equipo
     #[ORM\OneToMany(targetEntity: Jugador::class, mappedBy: 'equipo')]
     private Collection $plantilla;
 
+    #[ORM\OneToOne(targetEntity: Logotipo::class, mappedBy: 'equipo')]
+    private ?Logotipo $logotipo;
+
     public function __construct()
     {
         $this->plantilla = new ArrayCollection();
@@ -48,5 +51,10 @@ class Equipo
     public function getPlantilla(): Collection
     {
         return $this->plantilla;
+    }
+
+    public function getLogotipo(): ?Logotipo
+    {
+        return $this->logotipo;
     }
 }
