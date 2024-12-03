@@ -33,6 +33,10 @@ class Partido
     #[ORM\JoinColumn(nullable: false)]
     private ?Arbitro $arbitro;
 
+    #[ORM\ManyToOne(targetEntity: Sede::class, inversedBy: 'partidos')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Sede $sede;
+
     public function __construct()
     {
         $this->patrocinadores = new ArrayCollection();
@@ -95,6 +99,17 @@ class Partido
     public function setArbitro(Arbitro $arbitro): Partido
     {
         $this->arbitro = $arbitro;
+        return $this;
+    }
+
+    public function getSede(): ?Sede
+    {
+        return $this->sede;
+    }
+
+    public function setSede(?Sede $sede): Partido
+    {
+        $this->sede = $sede;
         return $this;
     }
 }
