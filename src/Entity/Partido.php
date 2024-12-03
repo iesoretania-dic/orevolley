@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+#[ORM\Table]
+class Partido
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $fechaHora;
+
+    #[ORM\ManyToOne(targetEntity: Equipo::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Equipo $local;
+
+    #[ORM\ManyToOne(targetEntity: Equipo::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Equipo $visitante;
+
+    #[ORM\ManyToMany(targetEntity: Patrocinador::class, inversedBy: 'partidos')]
+    private Collection $patrocinadores;
+
+    public function __construct()
+    {
+        $this->patrocinadores = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getFechaHora(): ?\DateTimeImmutable
+    {
+        return $this->fechaHora;
+    }
+
+    public function setFechaHora(\DateTimeImmutable $fechaHora): Partido
+    {
+        $this->fechaHora = $fechaHora;
+        return $this;
+    }
+
+    public function getLocal(): ?Equipo
+    {
+        return $this->local;
+    }
+
+    public function setLocal(Equipo $local): Partido
+    {
+        $this->local = $local;
+        return $this;
+    }
+
+    public function getVisitante(): ?Equipo
+    {
+        return $this->visitante;
+    }
+
+    public function setVisitante(Equipo $visitante): Partido
+    {
+        $this->visitante = $visitante;
+        return $this;
+    }
+
+    public function getPatrocinadores(): Collection
+    {
+        return $this->patrocinadores;
+    }
+
+    public function setPatrocinadores(Collection $patrocinadores): Partido
+    {
+        $this->patrocinadores = $patrocinadores;
+        return $this;
+    }
+}
