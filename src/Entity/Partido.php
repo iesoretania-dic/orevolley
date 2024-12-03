@@ -29,6 +29,10 @@ class Partido
     #[ORM\ManyToMany(targetEntity: Patrocinador::class, inversedBy: 'partidos')]
     private Collection $patrocinadores;
 
+    #[ORM\ManyToOne(targetEntity: Arbitro::class, inversedBy: 'partidos')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Arbitro $arbitro;
+
     public function __construct()
     {
         $this->patrocinadores = new ArrayCollection();
@@ -80,6 +84,17 @@ class Partido
     public function setPatrocinadores(Collection $patrocinadores): Partido
     {
         $this->patrocinadores = $patrocinadores;
+        return $this;
+    }
+
+    public function getArbitro(): ?Arbitro
+    {
+        return $this->arbitro;
+    }
+
+    public function setArbitro(Arbitro $arbitro): Partido
+    {
+        $this->arbitro = $arbitro;
         return $this;
     }
 }
