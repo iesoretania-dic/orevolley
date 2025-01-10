@@ -88,9 +88,17 @@ class Partido
         return $this->patrocinadores;
     }
 
-    public function setPatrocinadores(Collection $patrocinadores): Partido
+    public function addPatrocinador(Patrocinador $patrocinador): Partido
     {
-        $this->patrocinadores = $patrocinadores;
+        if (!$this->patrocinadores->contains($patrocinador)) {
+            $this->patrocinadores->add($patrocinador);
+        }
+        return $this;
+    }
+
+    public function removePatrocinador(Patrocinador $patrocinador): Partido
+    {
+        $this->patrocinadores->removeElement($patrocinador);
         return $this;
     }
 
