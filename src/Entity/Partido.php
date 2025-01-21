@@ -37,6 +37,12 @@ class Partido
     #[ORM\JoinColumn(nullable: false)]
     private ?Sede $sede;
 
+    #[ORM\Column]
+    private ?int $resultadoLocal = null;
+
+    #[ORM\Column]
+    private ?int $resultadoVisitante = null;
+
     public function __construct()
     {
         $this->patrocinadores = new ArrayCollection();
@@ -121,6 +127,30 @@ class Partido
     public function setSede(?Sede $sede): Partido
     {
         $this->sede = $sede;
+        return $this;
+    }
+
+    public function getResultadoLocal(): ?int
+    {
+        return $this->resultadoLocal;
+    }
+
+    public function setResultadoLocal(int $resultadoLocal): static
+    {
+        $this->resultadoLocal = $resultadoLocal;
+
+        return $this;
+    }
+
+    public function getResultadoVisitante(): ?int
+    {
+        return $this->resultadoVisitante;
+    }
+
+    public function setResultadoVisitante(int $resultadoVisitante): static
+    {
+        $this->resultadoVisitante = $resultadoVisitante;
+
         return $this;
     }
 }

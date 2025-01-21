@@ -22,6 +22,9 @@ class Patrocinador
     #[ORM\ManyToMany(targetEntity: Partido::class, mappedBy: 'patrocinadores')]
     private Collection $partidos;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url = null;
+
     public function __construct()
     {
         $this->partidos = new ArrayCollection();
@@ -49,5 +52,17 @@ class Patrocinador
     public function getPartidos(): Collection
     {
         return $this->partidos;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): static
+    {
+        $this->url = $url;
+
+        return $this;
     }
 }
