@@ -22,4 +22,9 @@ class ArbitroRepository extends ServiceEntityRepository
     {
         return $this->findBy(['nombre' => $nombre], ['apellidos' => 'ASC', 'nombre' => 'ASC']);
     }
+
+    public function save(): void
+    {
+        $this->getEntityManager()->flush();
+    }
 }

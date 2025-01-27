@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Arbitro;
 use App\Entity\Equipo;
 use App\Entity\Sede;
+use App\Form\ArbitroType;
 use App\Repository\ArbitroRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArbitroController extends AbstractController
 {
-    #[Route(path: '/arbitro/listar')]
+    #[Route(path: '/arbitro/listar', name: 'arbitro_listar')]
     public function todos(ArbitroRepository $arbitroRepository): Response
     {
         $arbitros = $arbitroRepository->findOrdenadosPorApellidoYNombre();
@@ -27,6 +30,24 @@ class ArbitroController extends AbstractController
         $arbitros = $arbitroRepository->findByNombreOrdenados($nombre);
         return $this->render('arbitro/listar.html.twig', [
             'arbitros' => $arbitros
+        ]);
+    }
+
+    #[Route(path: '/arbitro/{id}', name: 'arbitro_modificar')]
+    public function formulario(Request $request, ArbitroRepository $arbitroRepository, Arbitro $arbitro): Response
+    {
+        $form = $this->createForm(ArbitroType::class, $arbitro);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $arbitroRepository->save();
+                $this->addFlash('success', 'Cambios guardados con éxito');
+            } catch (\Exception) {
+                $this->addFlash('error', 'No se han podido guardar los cambios');
+            }
+        }
+        return $this->render('arbitro/form.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
