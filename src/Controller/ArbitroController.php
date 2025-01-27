@@ -42,6 +42,7 @@ class ArbitroController extends AbstractController
             try {
                 $arbitroRepository->save();
                 $this->addFlash('success', 'Cambios guardados con éxito');
+                return $this->redirectToRoute('arbitro_listar');
             } catch (\Exception) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }

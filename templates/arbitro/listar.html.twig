@@ -13,12 +13,14 @@
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Nº colegiado</th>
+            <th></th>
         </tr>
         {% for arbitro in arbitros %}
             <tr>
                 <td>{{ arbitro.nombre }}</td>
                 <td>{{ arbitro.apellidos }}</td>
                 <td>{{ arbitro.numColegiado }}</td>
+                <td><a href="{{ path('arbitro_modificar', {'id': arbitro.id}) }}">Editar</a></td>
             </tr>
         {% endfor %}
     </table>
