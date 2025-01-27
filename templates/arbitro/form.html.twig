@@ -1,10 +1,9 @@
 {% extends 'layout.html.twig' %}
-
 {% block content %}
     <h1>Modificar árbitro</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button type="submit">Guardar</button>
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{{ path('arbitro_listar') }}" class="btn btn-info">Volver al listado sin guardar</a>
     {{ form_end(form) }}
-    <a href="{{ path('arbitro_listar') }}">&lt; Volver al listado sin guardar</a>
 {% endblock %}
