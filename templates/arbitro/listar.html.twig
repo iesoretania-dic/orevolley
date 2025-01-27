@@ -13,7 +13,7 @@
                 <td>{{ arbitro.nombre }}</td>
                 <td>{{ arbitro.apellidos }}</td>
                 <td>{{ arbitro.numColegiado }}</td>
-                <td><a href="{{ path('arbitro_modificar', {'id': arbitro.id}) }}">Editar</a></td>
+                <td><a href="{{ path('arbitro_modificar', {'id': arbitro.id}) }}"><i class="fa fa-pencil"></i></a></td>
             </tr>
         {% endfor %}
     </table>
