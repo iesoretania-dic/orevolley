@@ -27,4 +27,9 @@ class ArbitroRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->flush();
     }
+
+    public function persist(Arbitro $arbitro)
+    {
+        $this->getEntityManager()->persist($arbitro);
+    }
 }

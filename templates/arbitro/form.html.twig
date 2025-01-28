@@ -1,6 +1,10 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-    <h1>Modificar árbitro</h1>
+    {% if arbitro.id %}
+        <h1>Modificar árbitro {{ arbitro.nombre }} {{ arbitro.apellidos }}</h1>
+    {% else %}
+        <h1>Alta de nuevo árbitro</h1>
+    {% endif %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Guardar</button>

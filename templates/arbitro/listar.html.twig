@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
     <h1>Listado de árbitros</h1>
+    <a href="{{ path('arbitro_crear') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo árbitro</a>
     <table class="table table-bordered table-striped table-hover">
         <tr>
             <th>Nombre</th>
