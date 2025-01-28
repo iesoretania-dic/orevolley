@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <h1>Eliminar árbitro</h1>
+
+    <div class="alert alert-danger">
+        <p>¿Estás seguro de que deseas eliminar el árbitro {{ arbitro.nombre }} {{ arbitro.apellidos }}?</p>
+        <p>Esta operación no se puede deshacer y podría morir algún gatito si te equivocas.</p>
+    </div>
+
+    <form method="post">
+        <a href="{{ path('arbitro_listar') }}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Volver al listado sin eliminar</a>
+        <button type="submit" class="btn btn-danger" name="confirmar"><i class="fa fa-trash"></i> Confirmar eliminación</button>
+    </form>
+{% endblock %}

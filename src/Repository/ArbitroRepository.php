@@ -32,4 +32,9 @@ class ArbitroRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->persist($arbitro);
     }
+
+    public function remove(Arbitro $arbitro)
+    {
+        $this->getEntityManager()->remove($arbitro);
+    }
 }

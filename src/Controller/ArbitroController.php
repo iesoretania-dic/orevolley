@@ -61,4 +61,22 @@ class ArbitroController extends AbstractController
             'arbitro' => $arbitro
         ]);
     }
+
+    #[Route(path: '/arbitro/eliminar/{id}', name: 'arbitro_eliminar', requirements: ['id' => '\d+'])]
+    public function eliminar(Request $request, ArbitroRepository $arbitroRepository, Arbitro $arbitro): Response
+    {
+        if ($request->request->has('confirmar')) {
+            try {
+                $arbitroRepository->remove($arbitro);
+                $arbitroRepository->save();
+                $this->addFlash('success', 'Árbitro eliminado con éxito');
+                return $this->redirectToRoute('arbitro_listar');
+            } catch (\Exception) {
+                $this->addFlash('error', 'Ha ocurrido un error al eliminar el árbitro');
+            }
+        }
+        return $this->render('arbitro/eliminar.html.twig', [
+            'arbitro' => $arbitro
+        ]);
+    }
 }

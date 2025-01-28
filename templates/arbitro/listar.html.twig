@@ -14,7 +14,10 @@
                 <td>{{ arbitro.nombre }}</td>
                 <td>{{ arbitro.apellidos }}</td>
                 <td>{{ arbitro.numColegiado }}</td>
-                <td><a href="{{ path('arbitro_modificar', {'id': arbitro.id}) }}"><i class="fa fa-pencil"></i></a></td>
+                <td>
+                    <a href="{{ path('arbitro_modificar', {'id': arbitro.id}) }}"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ path('arbitro_eliminar', {'id': arbitro.id}) }}"><i class="fa fa-trash"></i></a>
+                </td>
             </tr>
         {% endfor %}
     </table>
