@@ -36,6 +36,7 @@ class ArbitroController extends AbstractController
     #[Route('/arbitro/nuevo', name: 'arbitro_crear')]
     public function nuevo(Request $request, ArbitroRepository $arbitroRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $arbitro = new Arbitro();
         $arbitroRepository->persist($arbitro);
         return $this->formulario($request, $arbitroRepository, $arbitro);

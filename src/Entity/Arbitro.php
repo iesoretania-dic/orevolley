@@ -6,10 +6,12 @@ use App\Repository\ArbitroRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ArbitroRepository::class)]
 #[ORM\Table]
-class Arbitro
+class Arbitro implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,6 +29,12 @@ class Arbitro
 
     #[ORM\OneToMany(targetEntity: Partido::class, mappedBy: 'arbitro')]
     private Collection $partidos;
+
+    #[ORM\Column(length: 255)]
+    private ?string $clave = null;
+
+    #[ORM\Column]
+    private ?bool $esAdministrador = null;
 
     public function __construct()
     {
@@ -78,5 +86,62 @@ class Arbitro
     public function getPartidos(): Collection
     {
         return $this->partidos;
+    }
+
+    public function getRoles()
+    {
+        $roles = ['ROLE_USER'];
+        if ($this->esAdministrador) {
+            $roles[] = 'ROLE_ADMIN';
+        }
+        return $roles;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->getClave();
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getUsername()
+    {
+        return $this->getNumColegiado();
+    }
+
+    public function getUserIdentifier()
+    {
+        return $this->getNumColegiado();
+    }
+
+    public function getClave(): ?string
+    {
+        return $this->clave;
+    }
+
+    public function setClave(string $clave): static
+    {
+        $this->clave = $clave;
+
+        return $this;
+    }
+
+    public function isEsAdministrador(): ?bool
+    {
+        return $this->esAdministrador;
+    }
+
+    public function setEsAdministrador(bool $esAdministrador): static
+    {
+        $this->esAdministrador = $esAdministrador;
+
+        return $this;
     }
 }
