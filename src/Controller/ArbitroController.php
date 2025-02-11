@@ -7,6 +7,7 @@ use App\Entity\Equipo;
 use App\Entity\Sede;
 use App\Form\ArbitroType;
 use App\Repository\ArbitroRepository;
+use App\Security\ArbitroVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,6 +48,7 @@ class ArbitroController extends AbstractController
     #[Route(path: '/arbitro/{id}', name: 'arbitro_modificar', requirements: ['id' => '\d+'])]
     public function formulario(Request $request, ArbitroRepository $arbitroRepository, Arbitro $arbitro): Response
     {
+        $this->denyAccessUnlessGranted(ArbitroVoter::MODIFICAR, $arbitro);
         $form = $this->createForm(ArbitroType::class, $arbitro);
         $form->handleRequest($request);
         $nuevo = $arbitro->getId() === null;

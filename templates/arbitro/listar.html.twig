@@ -18,9 +18,11 @@
                 <td>{{ arbitro.apellidos }}</td>
                 <td>{{ arbitro.numColegiado }}</td>
                 <td>
-                    <a href="{{ path('arbitro_modificar', {'id': arbitro.id}) }}"><i class="fa fa-pencil"></i></a>
+                    {% if is_granted('ARBITRO_MODIFICAR', arbitro) %}
+                        <a href="{{ path('arbitro_modificar', {'id': arbitro.id}) }}"><i class="fa fa-pencil"></i></a>
+                    {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('arbitro_eliminar', {'id': arbitro.id}) }}"><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('arbitro_eliminar', {'id': arbitro.id}) }}"><i class="fa fa-trash"></i></a>
                     {% endif %}
                 </td>
             </tr>
