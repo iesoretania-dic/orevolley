@@ -65,6 +65,7 @@ class ArbitroController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route(path: '/arbitro/eliminar/{id}', name: 'arbitro_eliminar', requirements: ['id' => '\d+'])]
     public function eliminar(Request $request, ArbitroRepository $arbitroRepository, Arbitro $arbitro): Response
     {
