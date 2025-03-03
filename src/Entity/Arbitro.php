@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ArbitroRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ArbitroRepository::class)]
 #[ORM\Table]
+#ApiResource]
 class Arbitro implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]

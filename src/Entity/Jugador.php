@@ -2,10 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'path' => '/jugadores',
+        ]
+    ],
+    itemOperations: [
+        'get' => [
+            'path' => '/jugadores/{id}',
+        ],
+        'delete' => [
+            'path' => '/jugadores/{id}',
+            'security' => "is_granted('ROLE_ARBITRO')",
+        ]]
+)]
 class Jugador
 {
     #[ORM\Id]
