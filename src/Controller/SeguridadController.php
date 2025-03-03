@@ -24,4 +24,9 @@ class SeguridadController extends AbstractController
     {
         throw $this->createAccessDeniedException();
     }
+    #[Route('/api_login', name: 'api_login')]
+    public function api_login(): Response
+    {
+        throw $this->createAccessDeniedException('Esto no debería verse');
+    }
 }

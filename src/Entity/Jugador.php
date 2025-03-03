@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
         ],
         'delete' => [
             'path' => '/jugadores/{id}',
-            'security' => "is_granted('ROLE_ARBITRO')",
+            'security' => "is_granted('ROLE_ADMIN')",
         ]]
 )]
 class Jugador
